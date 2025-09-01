@@ -13,9 +13,9 @@ const app = express();
 app.use(express.json({ limit: "50kb" }));
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_ORIGIN,
-  methods: ["GET", "POST"],
-  credentials: true
+  origin: "https://tone-changer-dkkc.onrender.com",  // frontend URL
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 const limiter = rateLimit({ windowMs: 1000, max: 10 });
