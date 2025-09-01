@@ -1,11 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+
 export default defineConfig({
-base: '/Text_Tone_Picker_/',
-plugins: [react()],
-server: {
-  proxy: {
-    '/api': 'http://localhost:8080'
-  }
-}
+  plugins: [react()],
+  build: {
+    outDir: 'dist',   // important for Render
+  },
+  server: {
+    port: 3000,       // local dev port
+  },
 });
