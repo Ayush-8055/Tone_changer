@@ -47,11 +47,22 @@ export default function App() {
     setUndoStack((s) => [...s, text].slice(-50));
     setRedoStack([]);
     try {
-      const res = await fetch("/api/tone", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, cellId }),
-      });
+      // const res = await fetch("/api/tone", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ text, cellId }),
+      // });
+          const API =
+      process.env.NODE_ENV === "production"
+        ? "https://tone-changer-fj0b.onrender.com"   // 👈 Replace with your actual backend URL
+        : "http://localhost:8080";              // for local dev
+
+    const res = await fetch(`${API}/api/tone`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, cellId }),
+    });
+
       const data = await res.json();
       if (!data.ok) throw new Error(data.error || "Bad response");
       setText(data.text);
